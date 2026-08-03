@@ -1,0 +1,113 @@
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+
+    background: linear-gradient(rgba(0,0,0,0.45),
+                rgba(0,0,0,0.45)),
+                url("../assets/flat-hand-drawn-clothing-swap-web-template_23-2148832079.avif");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 90%;
+    max-width: 450px;
+
+    padding: 40px;
+
+    background: rgba(255,255,255,0.15);
+
+    backdrop-filter: blur(15px);
+
+    border: 1px solid rgba(255,255,255,0.25);
+
+    border-radius: 20px;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+h1 {
+    text-align: center;
+    color: rgb(17, 16, 16);
+    font-size: 34px;
+    margin-bottom: 30px;
+}
+
+input {
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: 15px;
+    margin: 15px 0;
+
+    border: none;
+    border-radius: 10px;
+
+    font-size: 16px;
+
+    outline: none;
+
+    background: rgba(255,255,255,0.9);
+
+    transition: 0.3s;
+}
+
+input:focus {
+    box-shadow: 0 0 8px #3498db;
+}
+
+button {
+    width: 100%;
+
+    padding: 15px;
+
+    margin-top: 20px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: #3498db;
+    color: white;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #2c80b4;
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+p {
+    color: white;
+    text-align: center;
+    margin-top: 20px;
+}
+
+a {
+    color: #ffe082;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
