@@ -11,7 +11,7 @@ async function auth(req, res, next) {
                 message: "Login First"
             });
         }
-        const decoded = jwt.verify(token, JWT_SECRET);
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
         if (decoded.role === "admin") {
             req.user = {

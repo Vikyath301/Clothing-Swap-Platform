@@ -2,7 +2,7 @@ const dns=require("dns");
 dns.setServers(["1.1.1.1","8.8.8.8"]);
 
 const mongoose = require("mongoose");
-mongoose.connect("mongodb+srv://vikyathkotian9_db_user:vikki123@fsdvikki.yxsapxe.mongodb.net/?appName=FSDVikki");
+mongoose.connect(process.env.MONGO_URI);
 
 
 const clothingSchema = new mongoose.Schema({
