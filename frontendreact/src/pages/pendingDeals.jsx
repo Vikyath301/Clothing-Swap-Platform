@@ -14,7 +14,7 @@ function PendingDeals(){
 
         try{
             const res = await axios.get(
-                "http://localhost:5000/deal/pending",
+                `${API}/deal/pending`,
                 {
                     withCredentials:true
                 }
@@ -29,7 +29,7 @@ function PendingDeals(){
     async function acceptDeal(id){
 
         await axios.put(
-            `http://localhost:5000/deal/accept/${id}`,
+            `${API}/deal/accept/${id}`,
             {},
             {
                 withCredentials:true
@@ -41,7 +41,7 @@ function PendingDeals(){
     async function rejectDeal(id){
 
         await axios.put(
-            `http://localhost:5000/deal/reject/${id}`,
+            `${API}/deal/reject/${id}`,
             {},
 
             {

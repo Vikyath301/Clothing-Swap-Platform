@@ -14,7 +14,7 @@ function ManageUsers() {
         try {
 
             const res = await axios.get(
-                "http://localhost:5000/admin/users",
+                `${API}/admin/users`,
                 {
                     withCredentials: true
                 }
@@ -38,7 +38,7 @@ function ManageUsers() {
         try {
 
             const res = await axios.delete(
-                `http://localhost:5000/admin/user/${id}`,
+                `${API}/admin/user/${id}`,
                 {
                     withCredentials: true
                 }

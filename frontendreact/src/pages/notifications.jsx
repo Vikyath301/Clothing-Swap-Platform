@@ -12,7 +12,7 @@ function Notification(){
 
         try{
             const res=await axios.get(
-                "http://localhost:5000/notifications",
+                `${API}/notifications`,
                 {
                     withCredentials:true
                 }
@@ -26,7 +26,7 @@ function Notification(){
 
     async function markRead(id){
         await axios.patch(
-            `http://localhost:5000/notifications/${id}`,
+            `${API}/notifications/${id}`,
             {},
 
             {

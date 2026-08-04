@@ -26,7 +26,7 @@ useEffect(() =>{
 async function fetchNotificationCount(){
     try{
         const res=await axios.get(
-            "http://localhost:5000/notifications/count",
+            `${API}/notifications/count`,
             {
                 withCredentials:true
             }
@@ -43,7 +43,7 @@ async function fetchNotificationCount(){
 async function fetchNotifications(){
     try{
         const res=await axios.get(
-            "http://localhost:5000/notifications",
+            `${API}/notifications`,
             {
                 withCredentials:true
             }
@@ -64,7 +64,7 @@ function openNotifications(){
 
 async function markRead(notification){
     await axios.patch(
-        `http://localhost:5000/notifications/${notification._id}`,
+        `${API}/${notification._id}`,
         {},
         {
             withCredentials:true
@@ -79,7 +79,7 @@ async function markRead(notification){
 
 const fetchClothes=async()=>{
 try{
-const res=await axios.get(`http://localhost:5000/home?location=${location}`);
+const res=await axios.get(`${API}/home?location=${location}`);
 setClothes(res.data);
 }
 catch(err){

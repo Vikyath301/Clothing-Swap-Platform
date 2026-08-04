@@ -23,7 +23,7 @@ function ItemDetails(){
     const fetchCloth = async () => {
 
         try{
-            const res = await axios.get(`http://localhost:5000/item/${id}`);
+            const res = await axios.get(`${API}/item/${id}`);
             setCloth(res.data);
         }
         catch(err){
@@ -40,7 +40,7 @@ function ItemDetails(){
     const openSwapCalculator = async () => {
         try{
             const res = await axios.get(
-                "http://localhost:5000/my-Listings",
+                `${API}/my-Listings`,
                 {
                     withCredentials:true
                 }
@@ -62,7 +62,7 @@ function ItemDetails(){
         }
     
         const res = await axios.post(
-            "http://localhost:5000/swap/value",
+            `${API}/swap/value`,
             {
                 myClothId: selectedItem,
                 targetClothId: cloth._id

@@ -15,7 +15,7 @@ function MyListings() {
 
         try {
             const res = await axios.get(
-                "http://localhost:5000/my-Listings",
+                `${API}/my-Listings`,
                 {
                     withCredentials: true
                 }
@@ -31,7 +31,7 @@ function MyListings() {
     async function deleteListing(id) {
         try {
             await axios.delete(
-                `http://localhost:5000/my-Listings/${id}`,
+                `${API}/my-Listings/${id}`,
                 {
                     withCredentials: true
                 }

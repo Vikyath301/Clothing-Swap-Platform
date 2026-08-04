@@ -19,7 +19,7 @@ function Chat() {
 
         try {
             const res = await axios.get(
-                `http://localhost:5000/chat/${clothId}`,
+                `${API}/chat/${clothId}`,
                 {
                     withCredentials: true
                 }
@@ -39,7 +39,7 @@ function Chat() {
 
         try {
             await axios.post(
-                "http://localhost:5000/chat/send",
+                `${API}/chat/send`,
                 {
                     clothId,
                     message
@@ -63,7 +63,7 @@ function Chat() {
         try {
             setLoading(true);
             const res = await axios.post(
-                "http://localhost:5000/deal/request",
+                `${API}/deal/request`,
                 {
                     clothId
                 },

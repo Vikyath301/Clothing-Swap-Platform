@@ -13,7 +13,7 @@ function AdminDisputes() {
     async function fetchDisputes() {
         try {
             const res = await axios.get(
-                "http://localhost:5000/admin/disputes",
+                `${API}/admin/disputes`,
                 {
                     withCredentials: true
                 }
@@ -29,7 +29,7 @@ function AdminDisputes() {
         try {
 
             await axios.patch(
-                `http://localhost:5000/admin/disputes/${id}`,
+                `${API}/admin/disputes/${id}`,
                 {
                     status
                 },

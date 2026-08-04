@@ -9,7 +9,7 @@ function AdminListings() {
     const fetchListings = async () => {
         try{
             const res = await axios.get(
-                "http://localhost:5000/admin/listings"
+                `${API}/admin/listings`
             );
             setListings(res.data);
         }
@@ -27,7 +27,7 @@ function AdminListings() {
             return;
 
         await axios.delete(
-            `http://localhost:5000/admin/listing/${id}`
+            `${API}/admin/listing/${id}`
         );
         fetchListings();
     };

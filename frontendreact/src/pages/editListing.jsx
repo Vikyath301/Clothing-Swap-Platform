@@ -23,7 +23,7 @@ function EditListing() {
 
     async function fetchCloth() {
         const res = await axios.get(
-            `http://localhost:5000/my-Listings/edit/${id}`,
+            `${API}/my-Listings/edit/${id}`,
             {
                 withCredentials: true
             }
@@ -34,7 +34,7 @@ function EditListing() {
     async function updateListing(e) {
         e.preventDefault();
         await axios.put(
-            `http://localhost:5000/my-Listings/edit/${id}`,
+            `${API}/my-Listings/edit/${id}`,
             cloth,
             {
                 withCredentials: true

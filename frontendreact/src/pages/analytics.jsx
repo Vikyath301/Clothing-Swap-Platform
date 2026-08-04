@@ -14,7 +14,7 @@ function Analytics() {
 
         try {
             const res = await axios.get(
-                "http://localhost:5000/admin/analytics",
+                `${API}/admin/analytics`,
                 {
                     withCredentials: true
                 }

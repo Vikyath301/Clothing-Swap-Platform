@@ -13,7 +13,7 @@ function MyDeals(){
     },[]);                      
     async function fetchDeals(){
         const res = await axios.get(
-            "http://localhost:5000/mydeals",
+            `${API}/mydeals`,
             {
                 withCredentials:true
             }
@@ -25,7 +25,7 @@ function MyDeals(){
         try {
 
             await axios.post(
-                "http://localhost:5000/dispute/create",
+                `${API}/dispute/create`,
                 {
                     dealId: showDispute._id,
                     clothId: showDispute.clothId,

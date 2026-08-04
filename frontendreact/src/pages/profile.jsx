@@ -14,7 +14,7 @@ function Profile(){
     async function fetchProfile(){
         try{
             const res=await axios.get(
-                "http://localhost:5000/profile",
+                `${API}/profile`,
                 {
                     withCredentials:true
                 }
@@ -29,7 +29,7 @@ function Profile(){
     async function logout(){
         try{
             await axios.post(
-                "http://localhost:5000/logout",
+                `${API}/logout`,
                 {},
                 {
                     withCredentials:true
