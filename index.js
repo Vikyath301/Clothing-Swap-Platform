@@ -16,8 +16,9 @@ app.use(cors({
         "http://localhost:5174",
         "http://localhost:5173",
         "https://clothing-swap-platform-8vaq8q9u7-vikki9.vercel.app",
-        "https://clothing-swap-platform-b3jqea7nv-vikki9.vercel.app"
-
+        "https://clothing-swap-platform-b3jqea7nv-vikki9.vercel.app",
+        "https://clothing-swap-platform-m3qqn8k2r-vikki9.vercel.app",
+        "https://clothing-swap-platform-chi.vercel.app"
     ],
         
     credentials: true
