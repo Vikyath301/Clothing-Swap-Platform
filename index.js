@@ -15,6 +15,7 @@ app.use(cors({
     origin:[ 
         "http://localhost:5174",
         "http://localhost:5173",
+        "https://clothing-swap-platform-9n2zduuy7-vikki9.vercel.app"
     ],
         
     credentials: true
