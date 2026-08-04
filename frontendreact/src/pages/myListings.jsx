@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../css/myListings.css";
 
+const API = import.meta.env.VITE_API_URL;
+
+
 function MyListings() {
     const [clothes, setClothes] = useState([]);
     const navigate=useNavigate();

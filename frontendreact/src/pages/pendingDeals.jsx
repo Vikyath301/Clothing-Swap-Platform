@@ -2,6 +2,9 @@ import {useEffect,useState} from "react";
 
 import axios from "axios";
 
+const API = import.meta.env.VITE_API_URL;
+
+
 function PendingDeals(){
 
     const [deals,setDeals] = useState([]);

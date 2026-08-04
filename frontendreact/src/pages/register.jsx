@@ -3,6 +3,9 @@
     import axios from "axios";
     import "../css/register.css"
 
+    const API = import.meta.env.VITE_API_URL;
+
+
     function Register(){
 
         const navigate = useNavigate();

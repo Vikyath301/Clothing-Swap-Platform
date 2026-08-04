@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import "../css/itemDetails.css";
 
+const API = import.meta.env.VITE_API_URL;
+
 
 function ItemDetails(){
 

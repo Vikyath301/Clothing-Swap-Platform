@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../css/profile.css";
 
+const API = import.meta.env.VITE_API_URL;
+
+
 function Profile(){
     const [profile,setProfile]=useState(null);
     const navigate=useNavigate();

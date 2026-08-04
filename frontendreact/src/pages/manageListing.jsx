@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import "../css/manageListing.css";
 
+const API = import.meta.env.VITE_API_URL;
+
+
 function AdminListings() {
 
     const [listings, setListings] = useState([]);

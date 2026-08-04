@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import "../css/manageDispute.css";
 
+const API = import.meta.env.VITE_API_URL;
+
+
 function AdminDisputes() {
 
     const [disputes, setDisputes] = useState([]);

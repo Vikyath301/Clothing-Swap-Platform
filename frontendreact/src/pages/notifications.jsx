@@ -1,6 +1,9 @@
 import {useEffect,useState} from "react";
 import axios from "axios";
 
+const API = import.meta.env.VITE_API_URL;
+
+
 function Notification(){
     const [notifications,setNotifications]=useState([]);
 

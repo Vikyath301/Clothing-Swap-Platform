@@ -4,6 +4,8 @@ import axios from "axios";
 import "../css/login.css";
 import { useNavigate } from "react-router-dom";
 
+const API = import.meta.env.VITE_API_URL;
+
 
 function Login() {
 
