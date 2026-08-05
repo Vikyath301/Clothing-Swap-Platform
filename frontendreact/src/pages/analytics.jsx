@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import "../css/Analytics.css";
 
+const API = import.meta.env.VITE_API_URL;
+
 function Analytics() {
 
     const [data, setData] = useState({});

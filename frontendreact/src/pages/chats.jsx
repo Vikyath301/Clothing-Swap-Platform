@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import "../css/chat.css";
 
+const API = import.meta.env.VITE_API_URL;
+
 function Chat() {
 
     const { clothId } = useParams();

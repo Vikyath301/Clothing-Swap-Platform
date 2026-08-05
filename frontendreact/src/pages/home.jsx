@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import "../css/home.css";
 
+const API = import.meta.env.VITE_API_URL;
+
 function Home(){
 
 const [clothes,setClothes]=useState([]);

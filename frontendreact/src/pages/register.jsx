@@ -53,6 +53,10 @@
 
             <div className="container">
 
+                <div className="Login">
+                    <button onClick={() => navigate("/login")}> Login </button>
+                </div>
+
                 <h1>Register</h1>
 
                 <form onSubmit={registerUser}>

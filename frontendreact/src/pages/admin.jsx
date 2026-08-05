@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import "../css/admin.css";
 
+const API = import.meta.env.VITE_API_URL;
+
 function Admin() {
 
     const navigate = useNavigate();
