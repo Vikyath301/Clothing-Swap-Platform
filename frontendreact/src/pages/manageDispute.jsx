@@ -60,11 +60,11 @@ function AdminDisputes() {
                         <h3>{dispute.raisedByName}</h3>
 
                         <p>
-                            <strong style={{color : "black"}}>Owner:</strong> {dispute.ownerName}
+                            <strong style={{color : "black"}}>Owner:</strong> <span style={{color : "black"}} >{dispute.ownerName}</span>
                         </p>
 
                         <p>
-                            <strong style={{color : "black"}}>Reason:</strong> {dispute.reason}
+                            <strong style={{color : "black"}}>Reason:</strong> <span style={{color : "black"}} >{dispute.reason}</span>
                         </p>
 
                         <p>
