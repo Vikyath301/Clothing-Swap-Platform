@@ -60,16 +60,18 @@ function AdminDisputes() {
                         <h3>{dispute.raisedByName}</h3>
 
                         <p>
-                            <strong>Owner:</strong> {dispute.ownerName}
+                            <strong style={{color : "black"}}>Owner:</strong> {dispute.ownerName}
                         </p>
 
                         <p>
-                            <strong>Reason:</strong> {dispute.reason}
+                            <strong style={{color : "black"}}>Reason:</strong> {dispute.reason}
                         </p>
 
                         <p>
-                            <strong>Date:</strong>{" "}
-                            {new Date(dispute.createdAt).toLocaleDateString()}
+                            <strong style={{color : "black"}}>Date:</strong>{" "}
+                            <span style={{ color: "black" }}>
+                                {new Date(dispute.createdAt).toLocaleDateString()}
+                            </span>
                         </p>
 
                         <span className={`status ${dispute.status}`}>
