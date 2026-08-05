@@ -66,7 +66,7 @@ function openNotifications(){
 
 async function markRead(notification){
     await axios.patch(
-        `${API}/${notification._id}`,
+        `${API}/notifications/${notification._id}`,
         {},
         {
             withCredentials:true
