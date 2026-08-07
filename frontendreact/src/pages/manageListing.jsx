@@ -46,14 +46,14 @@ function AdminListings() {
                     <div className="listing-card" key={cloth._id}>
                         <img src={cloth.image} alt=""/>
 
-                        <h3>{cloth.title}</h3>
-                        <p>
+                        <h3 style={{ color : "black"}}>{cloth.title}</h3>
+                        <p  style={{ color : "black"}}>
                             {cloth.brand}
                         </p>
-                        <p>
+                        <p style={{ color : "black"}}>
                             {cloth.location}
                         </p>
-                        <p>
+                        <p style={{ color : "black"}}>
                             Owner : {cloth.ownerName}
                         </p>
 
