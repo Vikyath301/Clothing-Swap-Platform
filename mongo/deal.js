@@ -9,11 +9,23 @@ const dealSchema = new mongoose.Schema({
 
     clothId:{
         type:mongoose.Schema.Types.ObjectId,
+        ref: "Clothing",
         required:true
+    },
+
+    clothTitle: {
+        type: String,
+        default: ""
+    },
+
+    clothImage: {
+        type: String,
+        default: ""
     },
 
     ownerId:{
         type:mongoose.Schema.Types.ObjectId,
+        ref: "register",
         required:true
     },
 
@@ -24,6 +36,7 @@ const dealSchema = new mongoose.Schema({
 
     customerId:{
         type:mongoose.Schema.Types.ObjectId,
+        ref: "register",
         required:true
     },
 
@@ -32,9 +45,24 @@ const dealSchema = new mongoose.Schema({
         required:true
     },
 
+    offeredClothId:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref: "Clothing"
+    },
+
+    offeredClothTitle: {
+        type: String,
+        default: ""
+    },
+
+    offeredClothImage: {
+        type: String,
+        default: ""
+    },
+
     status:{
         type:String,
-        enum:["pending","accepted","rejected"],
+        enum:["pending","accepted","rejected","completed"],
         default:"pending"
     }
 

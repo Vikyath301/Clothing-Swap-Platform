@@ -7,11 +7,11 @@ const auth = require("./auth");
 const { regModel } = require("../mongo/register");
 const { dealModel } = require("../mongo/deal");
 
-router.get("/profile", auth, async (req, res) => {
+const { clothingModel } = require("../mongo/home");
 
+router.get("/profile", auth, async (req, res) => {
     try {
-        const user = await regModel.findById(req.user._id)
-        .select("-password");
+        const user = await regModel.findById(req.user._id).select("-password");
 
         if (!user) {
             return res.status(404).json({
@@ -27,31 +27,61 @@ router.get("/profile", auth, async (req, res) => {
             status: "pending"
         });
 
+        const totalListings = await clothingModel.countDocuments({
+            ownerId: req.user._id
+        });
+
         const swapHistory = await dealModel.find({
             $or: [
                 { ownerId: req.user._id },
                 { customerId: req.user._id }
             ],
-            status: "completed"
+            status: { $in: ["accepted", "completed"] }
         })
-        .sort({ updatedAt: -1 })
-        .select("ownerName customerName clothId status updatedAt");
+        .populate("clothId")
+        .sort({ updatedAt: -1 });
+
         res.json({
+            id: user._id,
+            _id: user._id,
             name: user.name,
             email: user.email,
             phone: user.phone,
             location: user.location,
             profilePic: user.profilePic,
+            totalListings,
             pendingDeals,
             swapHistory
         });
-    }
-
-    catch (err) {
+    } catch (err) {
         console.log(err);
         res.status(500).json({
             message: "Server Error"
         });
+    }
+});
+
+router.put("/profile", auth, async (req, res) => {
+    try {
+        const { name, phone, location, profilePic } = req.body;
+        const updateData = {};
+        if (name) updateData.name = name;
+        if (phone !== undefined) updateData.phone = phone;
+        if (location !== undefined) updateData.location = location;
+        if (profilePic !== undefined) updateData.profilePic = profilePic;
+
+        const updatedUser = await regModel.findByIdAndUpdate(
+            req.user._id,
+            { $set: updateData },
+            { new: true }
+        ).select("-password");
+
+        res.json({
+            message: "Profile updated successfully",
+            user: updatedUser
+        });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
     }
 });
 

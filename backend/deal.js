@@ -8,169 +8,227 @@ const {dealModel} = require("../mongo/deal");
 const {clothingModel} = require("../mongo/home");
 const {notificationModel} = require("../mongo/notification");
 
-router.post("/deal/request",auth,async(req,res)=>{
-
-    try{
-        const {clothId}=req.body;
+router.post("/deal/request", auth, async (req, res) => {
+    try {
+        const { clothId, offeredClothId } = req.body;
         const cloth = await clothingModel.findById(clothId);
 
-        if(!cloth){
+        if (!cloth) {
             return res.status(404).json({
-                message:"Cloth not found"
+                message: "Cloth not found"
             });
         }
 
-        if(cloth.ownerId.toString()===req.user._id.toString()){
+        if (cloth.ownerId.toString() === req.user._id.toString()) {
             return res.status(400).json({
-                message:"You cannot request your own cloth"
+                message: "You cannot request your own cloth"
             });
         }
 
-        if(!cloth.isAvailable){
+        if (!cloth.isAvailable) {
             return res.status(400).json({
-                message:"Deal already completed"
+                message: "This item has already been swapped"
             });
         }
+
         const alreadyRequested = await dealModel.findOne({
             clothId,
-            customerId:req.user._id,
-            status:"pending"
+            customerId: req.user._id,
+            status: "pending"
         });
-        if(alreadyRequested){
+        if (alreadyRequested) {
             return res.status(400).json({
-                message:"Request already sent"
+                message: "Swap request is already pending for this item"
             });
         }
+
+        let offeredCloth = null;
+        if (offeredClothId) {
+            offeredCloth = await clothingModel.findById(offeredClothId);
+        }
+
         const deal = await dealModel.create({
             clothId,
-            ownerId:cloth.ownerId,
-            ownerName:cloth.ownerName,
-            customerId:req.user._id,
-            customerName:req.user.name
+            clothTitle: cloth.title,
+            clothImage: cloth.image,
+            ownerId: cloth.ownerId,
+            ownerName: cloth.ownerName,
+            customerId: req.user._id,
+            customerName: req.user.name,
+            offeredClothId: offeredCloth ? offeredCloth._id : null,
+            offeredClothTitle: offeredCloth ? offeredCloth.title : "",
+            offeredClothImage: offeredCloth ? offeredCloth.image : "",
+            status: "pending"
         });
 
-        cloth.dealStatus="pending";
+        cloth.dealStatus = "pending";
         await cloth.save();
-        await notificationModel.create({
+
+        const notif = await notificationModel.create({
             clothId,
-            receiverId:cloth.ownerId,
-            senderId:req.user._id,
-            senderName:req.user.name,
-            message:`${req.user.name} wants to confirm the swap.`,
-            type:"deal"
+            receiverId: cloth.ownerId,
+            senderId: req.user._id,
+            senderName: req.user.name,
+            message: `${req.user.name} sent a swap offer for "${cloth.title}"!`,
+            type: "deal"
         });
+
+        const io = req.app.get("io");
+        if (io) {
+            io.to(`user_${cloth.ownerId}`).emit("new_notification", notif);
+        }
+
         res.status(201).json({
-            message:"Deal request sent",
+            message: "Swap offer sent successfully!",
             deal
         });
-    }
-    catch(err){
+    } catch (err) {
         res.status(500).json({
-            message:err.message
+            message: err.message
         });
     }
 });
 
-
-router.get("/deal/pending",auth,async(req,res)=>{
-    try{
+router.get("/deal/pending", auth, async (req, res) => {
+    try {
         const deals = await dealModel.find({
-            ownerId:req.user._id,
-            status:"pending"
-        });
+            ownerId: req.user._id,
+            status: "pending"
+        })
+        .populate("clothId")
+        .populate("offeredClothId")
+        .sort({ createdAt: -1 });
+
         res.json(deals);
-    }
-    catch(err){
+    } catch (err) {
         res.status(500).json({
-            message:err.message
+            message: err.message
         });
     }
 });
 
-
-router.put("/deal/accept/:dealId",auth,async(req,res)=>{
-
-    try{
+router.put("/deal/accept/:dealId", auth, async (req, res) => {
+    try {
         const deal = await dealModel.findById(req.params.dealId);
 
-        if(!deal){
+        if (!deal) {
             return res.status(404).json({
-                message:"Deal not found"
+                message: "Deal not found"
             });
         }
-        deal.status="accepted";
+
+        deal.status = "accepted";
         await deal.save();
+
         const cloth = await clothingModel.findById(deal.clothId);
-        cloth.isAvailable=false;
-        cloth.dealStatus="confirmed";
-        await cloth.save();
-        await notificationModel.create({
-            clothId:deal.clothId,
-            receiverId:deal.customerId,
-            senderId:req.user._id,
-            senderName:req.user.name,
-            message:"Your deal has been accepted.",
-            type:"deal"
-        });
-        res.json({
-            message:"Deal accepted"
-        });
-    }
+        if (cloth) {
+            cloth.isAvailable = false;
+            cloth.dealStatus = "confirmed";
+            await cloth.save();
+        }
 
-    catch(err){
+        if (deal.offeredClothId) {
+            const offeredCloth = await clothingModel.findById(deal.offeredClothId);
+            if (offeredCloth) {
+                offeredCloth.isAvailable = false;
+                offeredCloth.dealStatus = "confirmed";
+                await offeredCloth.save();
+            }
+        }
+
+        const notif = await notificationModel.create({
+            clothId: deal.clothId,
+            receiverId: deal.customerId,
+            senderId: req.user._id,
+            senderName: req.user.name,
+            message: `Congratulations! Your swap deal for "${deal.clothTitle || "item"}" was accepted! 🎉`,
+            type: "deal"
+        });
+
+        const io = req.app.get("io");
+        if (io) {
+            io.to(`user_${deal.customerId}`).emit("new_notification", notif);
+        }
+
+        res.json({
+            message: "Swap deal accepted! Both items are now reserved.",
+            deal
+        });
+    } catch (err) {
         res.status(500).json({
-            message:err.message
+            message: err.message
         });
     }
 });
 
-router.put("/deal/reject/:dealId",auth,async(req,res)=>{
-
-    try{
+router.put("/deal/reject/:dealId", auth, async (req, res) => {
+    try {
         const deal = await dealModel.findById(req.params.dealId);
 
-        if(!deal){
+        if (!deal) {
             return res.status(404).json({
-                message:"Deal not found"
+                message: "Deal not found"
             });
         }
-        deal.status="rejected";
-        await deal.save();
-        await notificationModel.create({
-            clothId:deal.clothId,
-            receiverId:deal.customerId,
-            senderId:req.user._id,
-            senderName:req.user.name,
-            message:"Your deal request was rejected.",
-            type:"deal"
-        });
-        res.json({
-            message:"Rejected"
-        });
-    }
 
-    catch(err){
+        deal.status = "rejected";
+        await deal.save();
+
+        // Check if other pending deals exist for this cloth
+        const remainingPending = await dealModel.countDocuments({
+            clothId: deal.clothId,
+            status: "pending"
+        });
+
+        if (remainingPending === 0) {
+            const cloth = await clothingModel.findById(deal.clothId);
+            if (cloth && cloth.isAvailable) {
+                cloth.dealStatus = "none";
+                await cloth.save();
+            }
+        }
+
+        const notif = await notificationModel.create({
+            clothId: deal.clothId,
+            receiverId: deal.customerId,
+            senderId: req.user._id,
+            senderName: req.user.name,
+            message: `Your swap offer for "${deal.clothTitle || "item"}" was declined.`,
+            type: "deal"
+        });
+
+        const io = req.app.get("io");
+        if (io) {
+            io.to(`user_${deal.customerId}`).emit("new_notification", notif);
+        }
+
+        res.json({
+            message: "Swap offer rejected",
+            deal
+        });
+    } catch (err) {
         res.status(500).json({
-            message:err.message
+            message: err.message
         });
     }
 });
 
-
-
-
-router.get("/mydeals",auth,async(req,res)=>{
-
-    try{
+router.get("/mydeals", auth, async (req, res) => {
+    try {
         const deals = await dealModel.find({
-            customerId:req.user._id
-        });
-        res.json(deals);
-    }
+            $or: [
+                { customerId: req.user._id },
+                { ownerId: req.user._id }
+            ]
+        })
+        .populate("clothId")
+        .populate("offeredClothId")
+        .sort({ updatedAt: -1 });
 
-    catch(err){
+        res.json(deals);
+    } catch (err) {
         res.status(500).json({
-            message:err.message
+            message: err.message
         });
     }
 });

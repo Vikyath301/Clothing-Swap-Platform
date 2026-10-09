@@ -35,7 +35,15 @@ router.post("/login", async (req, res) => {
         
             return res.status(200).json({
                 message: "Admin Login Successful",
-                role: "admin"
+                role: "admin",
+                token,
+                user: {
+                    id: "admin",
+                    _id: "admin",
+                    name: "Admin",
+                    email: "admin@gmail.com",
+                    role: "admin"
+                }
             });
         }
 
@@ -83,9 +91,19 @@ router.post("/login", async (req, res) => {
         });
 
         res.status(200).json({
-
-            message: "Login Successful"
-
+            message: "Login Successful",
+            role: "user",
+            token,
+            user: {
+                id: user._id,
+                _id: user._id,
+                name: user.name,
+                email: user.email,
+                phone: user.phone || "",
+                location: user.location || "",
+                profilePic: user.profilePic || "",
+                role: "user"
+            }
         });
 
     }

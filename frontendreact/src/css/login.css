@@ -1,113 +1,69 @@
-body {
-    margin: 0;
-    min-height: 100vh;
-    font-family: Arial, Helvetica, sans-serif;
-
-    background: linear-gradient(rgba(0,0,0,0.45),
-                rgba(0,0,0,0.45)),
-                url("../assets/flat-hand-drawn-clothing-swap-web-template_23-2148832079.avif");
-
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+.auth-page-container {
+  min-height: calc(100vh - 100px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  background-color: var(--bg-page);
 }
 
-.login-page {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.auth-card {
+  width: 100%;
+  max-width: 440px;
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 36px 32px;
+  box-shadow: var(--shadow-md);
 }
 
-.container {
-    width: 90%;
-    max-width: 450px;
-
-    padding: 40px;
-
-    background: rgba(255,255,255,0.15);
-
-    backdrop-filter: blur(15px);
-
-    border: 1px solid rgba(255,255,255,0.25);
-
-    border-radius: 20px;
-
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+.auth-brand {
+  text-align: center;
+  margin-bottom: 24px;
 }
 
-h1 {
-    text-align: center;
-    color: rgb(17, 16, 16);
-    font-size: 34px;
-    margin-bottom: 30px;
+.auth-logo {
+  font-size: 38px;
+  display: inline-block;
+  margin-bottom: 8px;
 }
 
-input {
-    width: 100%;
-    box-sizing: border-box;
-
-    padding: 15px;
-    margin: 15px 0;
-
-    border: none;
-    border-radius: 10px;
-
-    font-size: 16px;
-
-    outline: none;
-
-    background: rgba(255,255,255,0.9);
-
-    transition: 0.3s;
+.auth-brand h2 {
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: 4px;
 }
 
-input:focus {
-    box-shadow: 0 0 8px #3498db;
+.auth-brand p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
 }
 
-button {
-    width: 100%;
-
-    padding: 15px;
-
-    margin-top: 20px;
-
-    border: none;
-    border-radius: 10px;
-
-    background: #3498db;
-    color: white;
-
-    font-size: 18px;
-    font-weight: bold;
-
-    cursor: pointer;
-
-    transition: 0.3s;
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
-button:hover {
-    background: #2c80b4;
-    transform: translateY(-2px);
+.auth-footer-prompt {
+  text-align: center;
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border-color);
 }
 
-button:active {
-    transform: scale(0.98);
+.auth-footer-prompt p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
 }
 
-p {
-    color: white;
-    text-align: center;
-    margin-top: 20px;
+.auth-footer-prompt a {
+  color: var(--primary);
+  font-weight: 700;
+  text-decoration: none;
 }
 
-a {
-    color: #ffe082;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-a:hover {
-    text-decoration: underline;
+.auth-footer-prompt a:hover {
+  text-decoration: underline;
 }

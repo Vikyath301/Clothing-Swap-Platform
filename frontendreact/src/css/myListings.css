@@ -1,87 +1,165 @@
-.my-listings{
-    min-height:100vh;
-    background:#f5f5f5;
-    padding:30px;
+.my-listings-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 20px;
 }
 
-.my-listings h1{
-    text-align:center;
-    margin-bottom:30px;
-    color:#222;
-    font-size:36px;
+.listings-page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
 }
 
-.my-card-container{
-    display:flex;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:30px;
+.listings-page-header h1 {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--text-main);
 }
 
-.my-card{
-    width:320px;
-    background:#fff;
-    border-radius:15px;
-    overflow:hidden;
-    box-shadow:0 5px 15px rgba(0,0,0,0.15);
-    transition:0.3s;
+.listings-page-header p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-top: 4px;
 }
 
-.my-card:hover{
-    transform:translateY(-6px);
+.wardrobe-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 22px;
 }
 
-.my-card img{
-    width:100%;
-    height:350px;
-    object-fit:cover;
-    display:block;
+.wardrobe-card {
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
 }
 
-.my-card h2{
-    text-align:center;
-    margin:15px 0;
-    color:#222;
+.wardrobe-img-box {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  background: #f1f5f9;
 }
 
-.my-card p{
-    margin:8px 18px;
-    font-size:15px;
-    color:#444;
+.wardrobe-img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.button-container{
-    display:flex;
-    justify-content:space-between;
-    gap:10px;
-    padding:20px 15px;
+.status-pill {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
 }
 
-.button-container button{
-    flex:1;
-    padding:10px;
-    border:none;
-    border-radius:8px;
-    cursor:pointer;
-    font-size:15px;
-    font-weight:bold;
-    transition:0.3s;
+.status-avail {
+  background: #15803d;
+  color: white;
 }
 
-.edit-btn{
-    background:#28a745;
-    color:white;
+.status-used {
+  background: #94a3b8;
+  color: white;
 }
 
-.edit-btn:hover{
-    background:#218838;
+.wardrobe-pts {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(15, 23, 42, 0.85);
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
 }
 
-.delete-btn{
-    background:#dc3545;
-    color:white;
+.wardrobe-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
-.delete-btn:hover{
-    background:#c82333;
+.wardrobe-body h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 4px;
+}
+
+.wardrobe-brand {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.wardrobe-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 8px;
+}
+
+.wardrobe-chips span {
+  font-size: 0.75rem;
+  background: var(--bg-subtle);
+  padding: 2px 7px;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+}
+
+.wardrobe-location {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+.wardrobe-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.wardrobe-actions button {
+  flex: 1;
+}
+
+.empty-wardrobe-card {
+  text-align: center;
+  padding: 60px 20px;
+  background: #ffffff;
+  border: 1px dashed var(--border-color);
+  border-radius: var(--radius-lg);
+}
+
+.empty-wardrobe-card .empty-icon {
+  font-size: 48px;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.empty-wardrobe-card h3 {
+  font-size: 1.25rem;
+  margin-bottom: 6px;
+}
+
+.empty-wardrobe-card p {
+  color: var(--text-muted);
+  margin-bottom: 20px;
 }

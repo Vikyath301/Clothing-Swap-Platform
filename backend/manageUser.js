@@ -69,11 +69,11 @@ router.get("/admin/analytics", auth, async (req, res) => {
         const availableListings = await clothingModel.countDocuments({
             isAvailable: true
         });
-        const pendingDeals = await clothingModel.countDocuments({
-            dealStatus: "Pending"
+        const pendingDeals = await dealModel.countDocuments({
+            status: "pending"
         });
-        const completedSwaps = await clothingModel.countDocuments({
-            dealStatus: "Completed"
+        const completedSwaps = await dealModel.countDocuments({
+            status: { $in: ["accepted", "completed"] }
         });
         res.json({
             totalUsers,

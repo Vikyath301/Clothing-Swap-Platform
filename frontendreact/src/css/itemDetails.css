@@ -1,69 +1,238 @@
-.details-container{
-    width:80%;
-    margin:40px auto;
-    display:flex;
-    gap:40px;
-    align-items:flex-start;
+.item-details-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 20px;
 }
 
-.details-container img{
-    width:400px;
-    border-radius:10px;
-    object-fit:cover;
+.details-breadcrumb {
+  margin-bottom: 16px;
 }
 
-.details{
-    flex:1;
+.btn-link-back {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 4px 0;
 }
 
-.details h1{
-    margin-bottom:20px;
+.btn-link-back:hover {
+  color: var(--primary);
 }
 
-.details p{
-    font-size:18px;
-    margin:12px 0;
+.details-card-wrapper {
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  gap: 36px;
+  padding: 32px;
 }
 
-.details button{
-    margin-top:25px;
-    padding:12px 25px;
-    border:none;
-    border-radius:8px;
-    cursor:pointer;
-    background:#2196f3;
-    color:white;
-    font-size:16px;
-
+.details-media-column {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
 }
 
-.details button:hover{
-    background:#0d8bf2;
-
+.garment-main-photo {
+  position: relative;
+  width: 100%;
+  height: 420px;
+  background: #f1f5f9;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--border-color);
 }
 
-.details p {
-    color : black
+.garment-main-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.calculator-popup{
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    background: white;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.3);
-    z-index: 1000;
-    width: 400px;
+.status-badge-float {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
 }
 
-.calculator-popup select{
-    width:100%;
-    padding:10px;
+.status-badge-float.available {
+  background: #ffffff;
+  color: #15803d;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-.calculator-popup button{
-    margin:10px 5px;
+.status-badge-float.swapped {
+  background: rgba(15, 23, 42, 0.85);
+  color: #ffffff;
+}
+
+.eco-impact-box {
+  background: var(--primary-light);
+  border: 1px solid #bbf7d0;
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.eco-leaf {
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.eco-impact-box strong {
+  font-size: 0.9rem;
+  color: var(--primary);
+  display: block;
+  margin-bottom: 2px;
+}
+
+.eco-impact-box p {
+  font-size: 0.82rem;
+  color: var(--text-main);
+  line-height: 1.4;
+}
+
+/* Info Column */
+.details-info-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.detail-category-badge {
+  display: inline-block;
+  background: var(--bg-subtle);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 8px;
+}
+
+.detail-title {
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: var(--text-main);
+  line-height: 1.25;
+  margin-bottom: 14px;
+}
+
+.detail-value-callout {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #f8fafc;
+  padding: 10px 16px;
+  border-radius: var(--radius-md);
+  border-left: 4px solid var(--primary);
+  margin-bottom: 20px;
+}
+
+.value-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.value-points {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+.specs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  padding: 18px 0;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 20px;
+}
+
+.spec-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.spec-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.spec-val {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-top: 2px;
+}
+
+.detail-description-box {
+  margin-bottom: 24px;
+}
+
+.detail-description-box h3 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 6px;
+}
+
+.detail-description-box p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.details-action-toolbar {
+  margin-top: auto;
+}
+
+.buyer-action-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.owner-action-group {
+  display: flex;
+  gap: 12px;
+}
+
+.btn-large {
+  padding: 14px 20px;
+  font-size: 1.05rem;
+}
+
+.details-loading-box, .details-not-found {
+  text-align: center;
+  padding: 80px 20px;
+}
+
+@media (max-width: 850px) {
+  .details-card-wrapper {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 20px;
+  }
+  .garment-main-photo {
+    height: 320px;
+  }
 }

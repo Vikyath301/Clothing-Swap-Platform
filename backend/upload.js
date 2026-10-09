@@ -20,7 +20,7 @@ router.post("/upload", auth, async (req, res) => {
             image
         } = req.body;
 
-        if (!title || !brand || !category || !size ||  !condition || !swapValue || !location || !image) {
+        if (!title || !brand || !category || !size || !condition || !swapValue || !location || !image) {
             return res.status(400).json({
                 message: "Please fill all fields"
             });
